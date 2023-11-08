@@ -1,0 +1,32 @@
+--- Comb Sort ---
+Comb Sort is a simple algorithm designed to improe upon the bubble sort algorithm.
+Instead of cmparing consecutive elements, Comb Sort compares elements that are a 
+certain distance apart. This distance is the "gap". The gap will decrease with each iteration
+by a factor called the shrink rate. This has the aim to deal with small values ("turtles") at the end of the 
+array in order to increase efficiency over Bubble Sort.
+
+--- Worst Case Asymptotic Run Time --- 
+The worst case run time for this algorith is O(n^2)
+
+--- Best Case Asymptotic Run Time ----
+The best case run time for this algorithm is O(nlog(n))
+
+--- Advantages of Comb Sort ---
+- Faster than Bubble Sort
+- It is modifiable and efficiency can be found through 
+  changing of the shrink factor.
+- It is simple, yet more effective than some other simple 
+  sorting algorithms.
+
+--- Disadvantages of Comb Sort ---
+- It is still inefficient compared to many more advanced algorithms.
+- The nature of the input array can have a large impact on the performance.
+
+--- When to Choose Comb Sort over Quick Sort or Selection Sort ---
+- It has an advantage over the quick sort algorithm in arrays that are almost
+  sorted and have "turtles". It is also quite simple to implement, so in a case where 
+  simplicity is preferred over performance Comb Sort might be a good choice.
+
+- Comb Sort will almost always perform better than Selection Sort. Only in the worst case scenario 
+  are the complexities the same. Both are simple to implement so because of the better average complexity
+  of Comb Sort I don't think I would choose Selection Sort above Comb Sort in any situation.
