@@ -17,7 +17,7 @@ int findMin(int deletion, int insertion, int substitution);
 void replace(char** sentence, int sizeSentence, char** dictionary, int numWords);
 
 int main(void) {
-    int sizeDict, numLines, sizeWord;
+    int sizeDict, numLines;
 
     scanf("%d %d", &sizeDict , &numLines);
 
@@ -31,8 +31,8 @@ int main(void) {
     }
 
     for (int i = 0; i < numLines; i++) {
-        char** sentence = (char**)malloc(10 * sizeof(char*));
-        for (int j = 0; j < 10; j++) {
+        char** sentence = (char**)malloc(11 * sizeof(char*));
+        for (int j = 0; j < 11; j++) {
             sentence[j] = (char*)malloc(11 *sizeof(char));
         }
 
@@ -118,16 +118,18 @@ int findMin(int deletion, int insertion, int substitution) {
 }
 
 // Function to replace each word in the sentence with the closest word from the dictionary.
-void replace(char** sentence, int sizeSentence, char** dictionary, int numWords) {
+void replace(char** sentence, int sizeSentence, char** dictionary, int sizeDict) {
     int minDistance, distance;
     char* closest;
+    int isFirstWord = 1; // New variable to track the first word in a line
+
     // Loop through each word in the sentence.
     for (int i = 0; i < sizeSentence; i++) {
         minDistance = INT_MAX;
         closest = NULL;
 
         // Loop through each word in the dictionary.
-        for (int j = 0; j < numWords; j++) {
+        for (int j = 0; j < sizeDict; j++) {
             distance = levenshtienDistance(sentence[i], dictionary[j]);
             // If the distance is smaller than the smallest so far, update closest.
             if (distance < minDistance) {
@@ -135,7 +137,19 @@ void replace(char** sentence, int sizeSentence, char** dictionary, int numWords)
                 closest = dictionary[j];
             }
         }
-        printf("%s ", closest);
+
+        // If it's not the first word, print a space before the word.
+        if (!isFirstWord) {
+            printf(" ");
+        }
+        printf("%s", closest);
+        isFirstWord = 0;
+
+        // If the next word is the start of a new line, print a newline character and reset isFirstWord.
+        if (i < sizeSentence - 1 && sentence[i + 1][0] == '\n') {
+            printf("\n");
+            isFirstWord = 1;
+        }
     }
-    printf("\n");
+    printf("\n"); // Print a newline character after the last word
 }
