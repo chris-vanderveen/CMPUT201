@@ -26,8 +26,6 @@ int main(void) {
                 printf("empty\n");
             } else {
                 printf("%s\n", front_student->id);
-                free(front_student->id);
-                free(front_student);
             }
         } else if (result[0][0] == 'L') {
             dequeue_last(ring);
@@ -41,8 +39,6 @@ int main(void) {
             } else if (result[0][0] == 'N' && student->maxWait > ring->length) {
                 push_back(ring, *student);
             }
-            free(student->id);
-            free(student);
         }
         for (int i = 0; i < 3; i++) {
             free(result[i]);
@@ -198,6 +194,9 @@ void increase_ring_size(Ring* ring) {
 }
 
 void free_ring(Ring* ring) {
+    for (int i = 0; i < ring->capacity; i++) {
+        free(ring->head[i].id);
+    }
     free(ring->head);
     free(ring);
 }
