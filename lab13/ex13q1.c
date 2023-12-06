@@ -15,7 +15,13 @@
 #include "ex13q1.h"
 
 #ifdef FASTIO
-#define PRINTF(...) do { len += snprintf(buff + len, sizeof(buff) - len, __VA_ARGS__); } while(0)
+#define PRINTF(...) do { \
+    len += snprintf(buff + len, sizeof(buff) - len, __VA_ARGS__); \
+    if (len >= sizeof(buff) - 1) { \
+        printf("%s", buff); \
+        len = 0; \
+    } \
+} while(0)
 char buff[2100000];
 size_t len = 0;
 #else
